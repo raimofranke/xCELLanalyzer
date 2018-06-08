@@ -1,0 +1,14 @@
+compounds
+2_Alsterpaullone
+2_Anisomycin
+2_DMSO
+2_Doxorubicin
+2_Griseofulvin
+2_LY294002
+2_Neopeltolide
+2_OkadaicAcid
+2_PD169316
+2_Podophyllotoxin
+2_RatjadonC
+2_Simvastatin
+2_Velcade

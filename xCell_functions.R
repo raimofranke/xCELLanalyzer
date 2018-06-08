@@ -1,10 +1,4 @@
 #functions for xCellAnalyze
-#
-#load libraries
-library("tidyverse")
-library("stringr")
-library("pheatmap")
-library("gplots")
 
 #read_xcell function: to read the three files for each run: raw data, annotation, compound names
 read_xcell <- function(exp_id, my_filepath){
@@ -106,6 +100,13 @@ normalize_dmso <- function(exp_id, xcell_median){
   return(xcell_median_norm)
 }
 
+#Removal of DMSO from not normalized median TCRPs
+remove_dmso <- function(exp_id, xcell_median){
+  ma <- match(paste0(exp_id, "_DMSO"), colnames(xcell_median))
+  xcell_median_notnorm <- xcell_median[,-ma]
+  return(xcell_median_notnorm)
+}
+
 #smoothing splines
 smooth_splines <- function(xcell_median_norm) {
   xcell_sp <- matrix(ncol=22, nrow=length(colnames(xcell_median_norm)))
@@ -120,10 +121,48 @@ smooth_splines <- function(xcell_median_norm) {
   return(xcell_sp)
 }
 
-pheatmap(median.sp, scale = "column", cluster_cols = FALSE, clustering_distance_rows = "correlation",
-         fontsize = 1.0)
+#score each replicate and calculate overall score
 
-rowv <- as.dendrogram(hclust(dist(median.sp),method="complete"))
-heatmap.2(median.sp, dendrogram=c("row"), Colv=F, Rowv=rowv, hclustfun=d, col=redgreen(75),
-          main="xcell61", scale="column", labCol=F, key=T, symkey=FALSE, density.info="none",
-          trace="none", cexRow=0.2)
+score1.function <- function(median.splines, dist.measure){
+distmat <- dist(median.splines, method = dist.measure)
+distmat <- as.matrix(distmat)
+score2 <- c()
+members <- c()
+best.score <- c()
+norm.score <- c()
+position <- c()
+
+for (i in 1:length(distmat[,1])){
+  distmat.ordered <- distmat[order(distmat[,i]),]
+  temp <- unlist(strsplit(toString(colnames(distmat)[i]), "_"))
+  tempPos <- grep(paste(temp[1],"+", sep=""), rownames(distmat.ordered), perl=TRUE)
+  position <- c(position, tempPos)
+  members <- c(members, length(tempPos))
+  best.score <- c(sum(c(1:length(tempPos))))
+  score <- c(sum(tempPos))
+  score2 <- c(score2, score)
+  norm.score <- c(norm.score, (best.score/score))
+}
+
+# results
+res <- list(rep = colnames(distmat),
+            score = score2, members = members, normscore=norm.score)
+
+return(res)
+}
+
+
+#print(sum(res$normscore)/i) #criterion how the overall procedure scored (i.e. to compare normalization etc.)
+#res <- as.data.frame(res)
+#print(res) #here we have to devide by max. score per replicate (or class in the future), one could define a threshhold to remove TCRPs which are not reproducible
+
+
+
+
+#pheatmap(median.sp, scale = "column", cluster_cols = FALSE, clustering_distance_rows = "correlation",
+#         fontsize = 1.0)
+
+#rowv <- as.dendrogram(hclust(dist(median.sp),method="complete"))
+#heatmap.2(median.sp, dendrogram=c("row"), Colv=F, Rowv=rowv, hclustfun=d, col=redgreen(75),
+#          main="xcell61", scale="column", labCol=F, key=T, symkey=FALSE, density.info="none",
+#          trace="none", cexRow=0.2)

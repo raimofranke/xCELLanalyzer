@@ -1,6 +1,8 @@
-my_filepath <- "/Users/raimofranke/Downloads/xcell2017-2/data/"
-#my_filepath <- "E:/My Dropbox/HZI/xcell2017/data/"
+#xcell_rocess_data.R - scrpt to process the 16 xCelligence runs
 
+#set filepath variable
+#my_filepath <- "E:/My Dropbox/HZI/R_projects/xCellAnalyze/data/"
+my_filepath <- "/Users/raimofranke/Dropbox/HZI/R_projects/xCellAnalyze/data/"
 #xcelldata_1
 xcell_raw <- read_xcell("1", my_filepath)
 xcell_raw_edited <- edit_df("1", xcell_raw)
@@ -14,14 +16,8 @@ print(selection.xcell)
 
 xcell_median_1 <- calculate_median_curves("1", xcell_norm)
 xcell_median_norm_1 <- normalize_dmso("1", xcell_median_1)
-xcell_sp <- smooth_splines(xcell_median_norm_1)
+xcell_median_notnorm_1 <- remove_dmso("1", xcell_median_1)
 
-pheatmap(xcell_sp, scale = "column", cluster_cols = FALSE, clustering_distance_rows = "correlation")
-
-library(gplots)
-rowv <- as.dendrogram(hclust(dist(xcell_sp),method="complete"))
-heatmap.2(xcell_sp, dendrogram=c("row"), Colv=F, Rowv=rowv, hclustfun=d, col=redgreen(75),
-          main = paste0("xcelldata_1"), scale="column", labCol=F, key=T, symkey=FALSE, density.info="none", trace="none", cexRow=0.8)
 
 ##########
 #xcelldata_2
@@ -40,14 +36,8 @@ xcell_norm[,"2_OkadaicAcid.2"] <- NULL
 
 xcell_median_2 <- calculate_median_curves("2", xcell_norm)
 xcell_median_norm_2 <- normalize_dmso("2", xcell_median_2)
-xcell_sp <- smooth_splines(xcell_median_norm_2)
+xcell_median_notnorm_2 <- remove_dmso("2", xcell_median_2)
 
-pheatmap(xcell_sp, scale = "column", cluster_cols = FALSE, clustering_distance_rows = "correlation")
-
-library(gplots)
-rowv <- as.dendrogram(hclust(dist(xcell_sp),method="complete"))
-heatmap.2(xcell_sp, dendrogram=c("row"), Colv=F, Rowv=rowv, hclustfun=d, col=redgreen(75),
-          main = paste0("xcelldata"), scale="column", labCol=F, key=T, symkey=FALSE, density.info="none", trace="none", cexRow=0.8)
 
 ##########
 #xcelldata_3
@@ -63,14 +53,8 @@ print(selection.xcell)
 
 xcell_median_3 <- calculate_median_curves("3", xcell_norm)
 xcell_median_norm_3 <- normalize_dmso("3", xcell_median_3)
-xcell_sp <- smooth_splines(xcell_median_norm_3)
+xcell_median_notnorm_3 <- remove_dmso("3", xcell_median_3)
 
-pheatmap(xcell_sp, scale = "column", cluster_cols = FALSE, clustering_distance_rows = "correlation")
-
-library(gplots)
-rowv <- as.dendrogram(hclust(dist(xcell_sp),method="complete"))
-heatmap.2(xcell_sp, dendrogram=c("row"), Colv=F, Rowv=rowv, hclustfun=d, col=redgreen(75),
-          main = paste0("xcelldata"), scale="column", labCol=F, key=T, symkey=FALSE, density.info="none", trace="none", cexRow=0.8)
 
 ##########
 #xcelldata_4
@@ -86,14 +70,8 @@ print(selection.xcell)
 
 xcell_median_4 <- calculate_median_curves("4", xcell_norm)
 xcell_median_norm_4 <- normalize_dmso("4", xcell_median_4)
-xcell_sp <- smooth_splines(xcell_median_norm_4)
+xcell_median_notnorm_4 <- remove_dmso("4", xcell_median_4)
 
-pheatmap(xcell_sp, scale = "column", cluster_cols = FALSE, clustering_distance_rows = "correlation")
-
-library(gplots)
-rowv <- as.dendrogram(hclust(dist(xcell_sp),method="complete"))
-heatmap.2(xcell_sp, dendrogram=c("row"), Colv=F, Rowv=rowv, hclustfun=d, col=redgreen(75),
-          main = paste0("xcelldata_4"), scale="column", labCol=F, key=T, symkey=FALSE, density.info="none", trace="none", cexRow=0.8)
 
 ##########
 #xcelldata_5
@@ -109,14 +87,7 @@ print(selection.xcell)
 
 xcell_median_5 <- calculate_median_curves("5", xcell_norm)
 xcell_median_norm_5 <- normalize_dmso("5", xcell_median_5)
-xcell_sp <- smooth_splines(xcell_median_norm_5)
-
-pheatmap(xcell_sp, scale = "column", cluster_cols = FALSE, clustering_distance_rows = "correlation")
-
-library(gplots)
-rowv <- as.dendrogram(hclust(dist(xcell_sp),method="complete"))
-heatmap.2(xcell_sp, dendrogram=c("row"), Colv=F, Rowv=rowv, hclustfun=d, col=redgreen(75),
-          main = paste0("xcelldata_5"), scale="column", labCol=F, key=T, symkey=FALSE, density.info="none", trace="none", cexRow=0.8)
+xcell_median_notnorm_5 <- remove_dmso("5", xcell_median_5)
 
 ##########
 #xcelldata_6
@@ -134,14 +105,8 @@ xcell_norm[,"6_ArchazolidB.4"] <- NULL
 
 xcell_median_6 <- calculate_median_curves("6", xcell_norm)
 xcell_median_norm_6 <- normalize_dmso("6", xcell_median_6)
-xcell_sp <- smooth_splines(xcell_median_norm_6)
+xcell_median_notnorm_6 <- remove_dmso("6", xcell_median_6)
 
-pheatmap(xcell_sp, scale = "column", cluster_cols = FALSE, clustering_distance_rows = "correlation")
-
-library(gplots)
-rowv <- as.dendrogram(hclust(dist(xcell_sp),method="complete"))
-heatmap.2(xcell_sp, dendrogram=c("row"), Colv=F, Rowv=rowv, hclustfun=d, col=redgreen(75),
-          main = paste0("xcelldata_6"), scale="column", labCol=F, key=T, symkey=FALSE, density.info="none", trace="none", cexRow=0.8)
 
 ##########
 #xcelldata_7
@@ -162,14 +127,8 @@ xcell_norm[,"7_Mevastatin.2"] <- NULL
 
 xcell_median_7 <- calculate_median_curves("7", xcell_norm)
 xcell_median_norm_7 <- normalize_dmso("7", xcell_median_7)
-xcell_sp <- smooth_splines(xcell_median_norm_7)
+xcell_median_notnorm_7 <- remove_dmso("7", xcell_median_7)
 
-pheatmap(xcell_sp, scale = "column", cluster_cols = FALSE, clustering_distance_rows = "correlation")
-
-library(gplots)
-rowv <- as.dendrogram(hclust(dist(xcell_sp),method="complete"))
-heatmap.2(xcell_sp, dendrogram=c("row"), Colv=F, Rowv=rowv, hclustfun=d, col=redgreen(75),
-          main = paste0("xcelldata_7"), scale="column", labCol=F, key=T, symkey=FALSE, density.info="none", trace="none", cexRow=0.8)
 
 ##########
 #xcelldata_8
@@ -190,14 +149,8 @@ xcell_norm[,"8_H89.2"] <- NULL
 
 xcell_median_8 <- calculate_median_curves("8", xcell_norm)
 xcell_median_norm_8 <- normalize_dmso("8", xcell_median_8)
-xcell_sp <- smooth_splines(xcell_median_norm_8)
+xcell_median_notnorm_8 <- remove_dmso("8", xcell_median_8)
 
-pheatmap(xcell_sp, scale = "column", cluster_cols = FALSE, clustering_distance_rows = "correlation")
-
-library(gplots)
-rowv <- as.dendrogram(hclust(dist(xcell_sp),method="complete"))
-heatmap.2(xcell_sp, dendrogram=c("row"), Colv=F, Rowv=rowv, hclustfun=d, col=redgreen(75),
-          main = paste0("xcelldata_8"), scale="column", labCol=F, key=T, symkey=FALSE, density.info="none", trace="none", cexRow=0.8)
 
 ##########
 #xcelldata_9
@@ -213,14 +166,8 @@ print(selection.xcell)
 
 xcell_median_9 <- calculate_median_curves("9", xcell_norm)
 xcell_median_norm_9 <- normalize_dmso("9", xcell_median_9)
-xcell_sp <- smooth_splines(xcell_median_norm_9)
+xcell_median_notnorm_9 <- remove_dmso("9", xcell_median_9)
 
-pheatmap(xcell_sp, scale = "column", cluster_cols = FALSE, clustering_distance_rows = "correlation")
-
-library(gplots)
-rowv <- as.dendrogram(hclust(dist(xcell_sp),method="complete"))
-heatmap.2(xcell_sp, dendrogram=c("row"), Colv=F, Rowv=rowv, hclustfun=d, col=redgreen(75),
-          main = paste0("xcelldata_9"), scale="column", labCol=F, key=T, symkey=FALSE, density.info="none", trace="none", cexRow=0.8)
 
 ##########
 #xcelldata_10
@@ -236,14 +183,8 @@ print(selection.xcell)
 
 xcell_median_10 <- calculate_median_curves("10", xcell_norm)
 xcell_median_norm_10 <- normalize_dmso("10", xcell_median_10)
-xcell_sp <- smooth_splines(xcell_median_norm_10)
+xcell_median_notnorm_10 <- remove_dmso("10", xcell_median_10)
 
-pheatmap(xcell_sp, scale = "column", cluster_cols = FALSE, clustering_distance_rows = "correlation")
-
-library(gplots)
-rowv <- as.dendrogram(hclust(dist(xcell_sp),method="complete"))
-heatmap.2(xcell_sp, dendrogram=c("row"), Colv=F, Rowv=rowv, hclustfun=d, col=redgreen(75),
-          main = paste0("xcelldata_10"), scale="column", labCol=F, key=T, symkey=FALSE, density.info="none", trace="none", cexRow=0.8)
 
 ##########
 #xcelldata_11
@@ -264,14 +205,8 @@ xcell_norm[,"11_Velcade.3"] <- NULL
 
 xcell_median_11 <- calculate_median_curves("11", xcell_norm)
 xcell_median_norm_11 <- normalize_dmso("11", xcell_median_11)
-xcell_sp <- smooth_splines(xcell_median_norm_11)
+xcell_median_notnorm_11 <- remove_dmso("11", xcell_median_11)
 
-pheatmap(xcell_sp, scale = "column", cluster_cols = FALSE, clustering_distance_rows = "correlation")
-
-library(gplots)
-rowv <- as.dendrogram(hclust(dist(xcell_sp),method="complete"))
-heatmap.2(xcell_sp, dendrogram=c("row"), Colv=F, Rowv=rowv, hclustfun=d, col=redgreen(75),
-          main = paste0("xcelldata_11"), scale="column", labCol=F, key=T, symkey=FALSE, density.info="none", trace="none", cexRow=0.8)
 
 ##########
 #xcelldata_12
@@ -287,14 +222,8 @@ print(selection.xcell)
 
 xcell_median_12 <- calculate_median_curves("12", xcell_norm)
 xcell_median_norm_12 <- normalize_dmso("12", xcell_median_12)
-xcell_sp <- smooth_splines(xcell_median_norm_12)
+xcell_median_notnorm_12 <- remove_dmso("12", xcell_median_12)
 
-pheatmap(xcell_sp, scale = "column", cluster_cols = FALSE, clustering_distance_rows = "correlation")
-
-library(gplots)
-rowv <- as.dendrogram(hclust(dist(xcell_sp),method="complete"))
-heatmap.2(xcell_sp, dendrogram=c("row"), Colv=F, Rowv=rowv, hclustfun=d, col=redgreen(75),
-          main = paste0("xcelldata_12"), scale="column", labCol=F, key=T, symkey=FALSE, density.info="none", trace="none", cexRow=0.8)
 
 ##########
 #xcelldata_13
@@ -310,14 +239,8 @@ print(selection.xcell)
 
 xcell_median_13 <- calculate_median_curves("13", xcell_norm)
 xcell_median_norm_13 <- normalize_dmso("13", xcell_median_13)
-xcell_sp <- smooth_splines(xcell_median_norm_13)
+xcell_median_notnorm_13 <- remove_dmso("13", xcell_median_13)
 
-pheatmap(xcell_sp, scale = "column", cluster_cols = FALSE, clustering_distance_rows = "correlation")
-
-library(gplots)
-rowv <- as.dendrogram(hclust(dist(xcell_sp),method="complete"))
-heatmap.2(xcell_sp, dendrogram=c("row"), Colv=F, Rowv=rowv, hclustfun=d, col=redgreen(75),
-          main = paste0("xcelldata_13"), scale="column", labCol=F, key=T, symkey=FALSE, density.info="none", trace="none", cexRow=0.8)
 
 ##########
 #xcelldata_14
@@ -333,14 +256,8 @@ print(selection.xcell)
 
 xcell_median_14 <- calculate_median_curves("14", xcell_norm)
 xcell_median_norm_14 <- normalize_dmso("14", xcell_median_14)
-xcell_sp <- smooth_splines(xcell_median_norm_14)
+xcell_median_notnorm_14 <- remove_dmso("14", xcell_median_14)
 
-pheatmap(xcell_sp, scale = "column", cluster_cols = FALSE, clustering_distance_rows = "correlation")
-
-library(gplots)
-rowv <- as.dendrogram(hclust(dist(xcell_sp),method="complete"))
-heatmap.2(xcell_sp, dendrogram=c("row"), Colv=F, Rowv=rowv, hclustfun=d, col=redgreen(75),
-          main = paste0("xcelldata_14"), scale="column", labCol=F, key=T, symkey=FALSE, density.info="none", trace="none", cexRow=0.8)
 
 ##########
 #xcelldata_15
@@ -358,14 +275,8 @@ xcell_norm[,"15_SB203580.4"] <- NULL
 
 xcell_median_15 <- calculate_median_curves("15", xcell_norm)
 xcell_median_norm_15 <- normalize_dmso("15", xcell_median_15)
-xcell_sp <- smooth_splines(xcell_median_norm_15)
+xcell_median_notnorm_15 <- remove_dmso("15", xcell_median_15)
 
-pheatmap(xcell_sp, scale = "column", cluster_cols = FALSE, clustering_distance_rows = "correlation")
-
-library(gplots)
-rowv <- as.dendrogram(hclust(dist(xcell_sp),method="complete"))
-heatmap.2(xcell_sp, dendrogram=c("row"), Colv=F, Rowv=rowv, hclustfun=d, col=redgreen(75),
-          main = paste0("xcelldata_15"), scale="column", labCol=F, key=T, symkey=FALSE, density.info="none", trace="none", cexRow=0.8)
 
 ##########
 #xcelldata_16
@@ -380,13 +291,4 @@ print(selection.xcell)
 
 xcell_median_16 <- calculate_median_curves("16", xcell_norm)
 xcell_median_norm_16 <- normalize_dmso("16", xcell_median_16)
-xcell_sp <- smooth_splines(xcell_median_norm_16)
-
-pheatmap(xcell_sp, scale = "column", cluster_cols = FALSE, clustering_distance_rows = "correlation")
-
-library(gplots)
-rowv <- as.dendrogram(hclust(dist(xcell_sp),method="complete"))
-heatmap.2(xcell_sp, dendrogram=c("row"), Colv=F, Rowv=rowv, hclustfun=d, col=redgreen(75),
-          main = paste0("xcelldata_16"), scale="column", labCol=F, key=T, symkey=FALSE, density.info="none", trace="none", cexRow=0.8)
-
-
+xcell_median_notnorm_16 <- remove_dmso("16", xcell_median_16)

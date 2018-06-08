@@ -1,0 +1,13 @@
+compounds
+11_Alsterpaullone
+11_Anisomycin
+11_Doxorubicin
+11_Griseofulvin
+11_LY294002
+11_OkadaicAcid
+11_PD169316
+11_Podophyllotoxin
+11_RatjadonC
+11_Simvastatin
+11_Velcade
+11_DMSO

@@ -1,0 +1,16 @@
+compounds
+3_A23187
+3_ActinomycinD
+3_Aphidicolin
+3_ArchazolidB
+3_Chelerythrine
+3_CyclosporinA
+3_DMSO
+3_EpothiloneB
+3_Etoposide
+3_Indirubin3monoxime
+3_Myriaporone
+3_SaframycinMx1
+3_Staurosporine
+3_TubulysinB
+3_Vinblastine

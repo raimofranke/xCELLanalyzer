@@ -1,0 +1,15 @@
+compounds
+1_Apicularen
+1_Cycloheximide
+1_DMSO
+1_Methotrexate
+1_Mevastatin
+1_MG132
+1_MyxothiazolA
+1_Oligomycin
+1_Puromycin
+1_Rapamycin
+1_RhizopodinA
+1_Taxol
+1_Vioprolide
+1_Wortmannin

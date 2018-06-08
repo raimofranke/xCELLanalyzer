@@ -1,0 +1,17 @@
+compounds
+9_Alsterpaullone
+9_Anisomycin
+9_Cycloheximide
+9_Doxorubicin
+9_GephyronicAcidA
+9_Myriaporone
+9_Nocadazole
+9_OkadaicAcid
+9_PD169316
+9_Podophyllotoxin
+9_Puromycin
+9_RatjadonC
+9_SB203580
+9_Simvastatin
+9_Velcade
+9_DMSO

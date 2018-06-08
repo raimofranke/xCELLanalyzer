@@ -1,0 +1,12 @@
+compounds
+5_ActinomycinD
+5_Chelerythrine
+5_CytochalasinD
+5_DMSO
+5_EpothiloneB
+5_LY294002
+5_Rapamycin
+5_SB202190
+5_SB203580
+5_Scriptaid
+5_Soraphen
