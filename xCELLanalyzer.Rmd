@@ -1,5 +1,5 @@
 ---
-title: "xcellAnalyze - Data Analysis"
+title: "xCELLanalyzer - Data Analysis"
 output:
   word_document: default
   html_notebook: default
