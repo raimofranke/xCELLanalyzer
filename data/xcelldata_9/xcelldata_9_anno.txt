@@ -92,6 +92,6 @@ G6	9_Simvastatin.3
 B2	9_Tedanolide.1
 D6	9_Tedanolide.2
 F5	9_Tedanolide.3
-C7	9_Velcade.1
-E6	9_Velcade.2
-G8	9_Velcade.3
+C7	9_Bortezomib.1
+E6	9_Bortezomib.2
+G8	9_Bortezomib.3

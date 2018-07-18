@@ -31,6 +31,10 @@ c09_ArchazolidB_13
 c10_ArgyrinA_4
 c10_ArgyrinA_12
 c10_ArgyrinA_13
+c58_Bortezomib_2
+c58_Bortezomib_7
+c58_Bortezomib_9
+c58_Bortezomib_11
 c12_Camptothecin_4
 c12_Camptothecin_12
 c12_Camptothecin_13
@@ -112,7 +116,6 @@ c34_Myriaporone_3
 c34_Myriaporone_7
 c34_Myriaporone_9
 c34_Myriaporone_10
-c34_Myriaporone_15
 c34_Myriaporone_16
 c35_MyxothiazolA_1
 c35_MyxothiazolA_7
@@ -203,10 +206,6 @@ c56_Trichostatin_14
 c57_TubulysinB_3
 c57_TubulysinB_7
 c57_TubulysinB_8
-c58_Velcade_2
-c58_Velcade_7
-c58_Velcade_9
-c58_Velcade_11
 c59_Vinblastin_16
 c59_Vinblastine_3
 c59_Vinblastine_7

@@ -53,8 +53,8 @@ C3	7_Taxol.1
 F5	7_Taxol.2
 F7	7_TubulysinB.1
 F10	7_TubulysinB.2
-B9	7_Velcade.1
-D3	7_Velcade.2
+B9	7_Bortezomib.1
+D3	7_Bortezomib.2
 C4	7_Vinblastine.1
 E9	7_Vinblastine.2
 C2	7_Vioprolide.1

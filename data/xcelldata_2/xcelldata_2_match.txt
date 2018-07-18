@@ -11,4 +11,4 @@ compounds
 2_Podophyllotoxin
 2_RatjadonC
 2_Simvastatin
-2_Velcade
+2_Bortezomib

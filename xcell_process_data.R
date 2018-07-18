@@ -1,16 +1,14 @@
-#xcell_rocess_data.R - scrpt to process the 16 xCelligence runs
+#xcell_process_data.R - script to process the 16 xCelligence runs
 
-#set filepath variable
-#my_filepath <- "E:/My Dropbox/HZI/R_projects/xCellAnalyze/data/"
-my_filepath <- "/Users/raimofranke/Dropbox/HZI/R_projects/xCellAnalyze/data/"
-#xcelldata_1
+my_filepath <- paste0(getwd(), "/data/")
+
 xcell_raw <- read_xcell("1", my_filepath)
 xcell_raw_edited <- edit_df("1", xcell_raw)
 xcell_norm <- normalize_xcell(xcell_raw_edited)
 results.xcell <- do_median_polish("1", xcell_norm)
 
-#For a selection of samples with RANGEresiduals >0.5
-selection.xcell<- subset(results.xcell, results.xcell[,"RNGvector"] > 0.5)
+#For a selection of samples with sum(abs(residuals)) > 90
+selection.xcell<- subset(results.xcell, results.xcell[,"res_sum"] > 90)
 print(selection.xcell)
 
 
@@ -26,8 +24,8 @@ xcell_raw_edited <- edit_df("2", xcell_raw)
 xcell_norm <- normalize_xcell(xcell_raw_edited)
 results.xcell <- do_median_polish("2", xcell_norm)
 
-#For a selection of samples with RANGEresiduals >0.5
-selection.xcell<- subset(results.xcell, results.xcell[,"RNGvector"] > 0.5)
+#For a selection of samples with sum(abs(residuals)) > 90
+selection.xcell<- subset(results.xcell, results.xcell[,"res_sum"] > 90)
 print(selection.xcell)
 
 #removal of outliers
@@ -46,8 +44,8 @@ xcell_raw_edited <- edit_df("3", xcell_raw)
 xcell_norm <- normalize_xcell(xcell_raw_edited)
 results.xcell <- do_median_polish("3", xcell_norm)
 
-#For a selection of samples with RANGEresiduals >0.5
-selection.xcell<- subset(results.xcell, results.xcell[,"RNGvector"] > 0.5)
+#For a selection of samples with sum(abs(residuals)) > 90
+selection.xcell<- subset(results.xcell, results.xcell[,"res_sum"] > 90)
 print(selection.xcell)
 
 
@@ -63,8 +61,8 @@ xcell_raw_edited <- edit_df("4", xcell_raw)
 xcell_norm <- normalize_xcell(xcell_raw_edited)
 results.xcell <- do_median_polish("4", xcell_norm)
 
-#For a selection of samples with RANGEresiduals >0.5
-selection.xcell<- subset(results.xcell, results.xcell[,"RNGvector"] > 0.5)
+#For a selection of samples with sum(abs(residuals)) > 90
+selection.xcell<- subset(results.xcell, results.xcell[,"res_sum"] > 90)
 print(selection.xcell)
 
 
@@ -80,8 +78,8 @@ xcell_raw_edited <- edit_df("5", xcell_raw)
 xcell_norm <- normalize_xcell(xcell_raw_edited)
 results.xcell <- do_median_polish("5", xcell_norm)
 
-#For a selection of samples with RANGEresiduals >0.5
-selection.xcell<- subset(results.xcell, results.xcell[,"RNGvector"] > 0.5)
+#For a selection of samples with sum(abs(residuals)) > 90
+selection.xcell<- subset(results.xcell, results.xcell[,"res_sum"] > 90)
 print(selection.xcell)
 
 
@@ -96,8 +94,8 @@ xcell_raw_edited <- edit_df("6", xcell_raw)
 xcell_norm <- normalize_xcell(xcell_raw_edited)
 results.xcell <- do_median_polish("6", xcell_norm)
 
-#For a selection of samples with RANGEresiduals >0.5
-selection.xcell<- subset(results.xcell, results.xcell[,"RNGvector"] > 0.5)
+#For a selection of samples with sum(abs(residuals)) > 90
+selection.xcell<- subset(results.xcell, results.xcell[,"res_sum"] > 90)
 print(selection.xcell)
 
 #removal of outliers
@@ -115,15 +113,12 @@ xcell_raw_edited <- edit_df("7", xcell_raw)
 xcell_norm <- normalize_xcell(xcell_raw_edited)
 results.xcell <- do_median_polish("7", xcell_norm)
 
-#For a selection of samples with RANGEresiduals >0.5
-selection.xcell<- subset(results.xcell, results.xcell[,"RNGvector"] > 0.5)
+#For a selection of samples with sum(abs(residuals)) > 90
+selection.xcell<- subset(results.xcell, results.xcell[,"res_sum"] > 90)
 print(selection.xcell)
 
 #removal of outliers
-xcell_norm[,"7_H89.3"] <- NULL
 #Mevastatin has to be removed completely, only two replicates and one had defective electrode
-xcell_norm[,"7_Mevastatin.1"] <- NULL
-xcell_norm[,"7_Mevastatin.2"] <- NULL
 
 xcell_median_7 <- calculate_median_curves("7", xcell_norm)
 xcell_median_norm_7 <- normalize_dmso("7", xcell_median_7)
@@ -137,15 +132,13 @@ xcell_raw_edited <- edit_df("8", xcell_raw)
 xcell_norm <- normalize_xcell(xcell_raw_edited)
 results.xcell <- do_median_polish("8", xcell_norm)
 
-#For a selection of samples with RANGEresiduals >0.5
-selection.xcell<- subset(results.xcell, results.xcell[,"RNGvector"] > 0.5)
+#For a selection of samples with sum(abs(residuals)) > 90
+selection.xcell<- subset(results.xcell, results.xcell[,"res_sum"] > 90)
 print(selection.xcell)
 
 #removal of outliers
 
 #H89 has to be removed completely, only two replicates and one had defective electrode
-xcell_norm[,"8_H89.1"] <- NULL
-xcell_norm[,"8_H89.2"] <- NULL
 
 xcell_median_8 <- calculate_median_curves("8", xcell_norm)
 xcell_median_norm_8 <- normalize_dmso("8", xcell_median_8)
@@ -159,10 +152,12 @@ xcell_raw_edited <- edit_df("9", xcell_raw)
 xcell_norm <- normalize_xcell(xcell_raw_edited)
 results.xcell <- do_median_polish("9", xcell_norm)
 
-#For a selection of samples with RANGEresiduals >0.5
-selection.xcell<- subset(results.xcell, results.xcell[,"RNGvector"] > 0.5)
+#For a selection of samples with sum(abs(residuals)) > 90
+selection.xcell<- subset(results.xcell, results.xcell[,"res_sum"] > 90)
 print(selection.xcell)
 
+#removal of outliers
+xcell_norm[,"9_OkadaicAcid.2"] <- NULL
 
 xcell_median_9 <- calculate_median_curves("9", xcell_norm)
 xcell_median_norm_9 <- normalize_dmso("9", xcell_median_9)
@@ -176,8 +171,8 @@ xcell_raw_edited <- edit_df("10", xcell_raw)
 xcell_norm <- normalize_xcell(xcell_raw_edited)
 results.xcell <- do_median_polish("10", xcell_norm)
 
-#For a selection of samples with RANGEresiduals >0.5
-selection.xcell<- subset(results.xcell, results.xcell[,"RNGvector"] > 0.5)
+#For a selection of samples with sum(abs(residuals)) > 90
+selection.xcell<- subset(results.xcell, results.xcell[,"res_sum"] > 90)
 print(selection.xcell)
 
 
@@ -193,15 +188,14 @@ xcell_raw_edited <- edit_df("11", xcell_raw)
 xcell_norm <- normalize_xcell(xcell_raw_edited)
 results.xcell <- do_median_polish("11", xcell_norm)
 
-#For a selection of samples with RANGEresiduals >0.5
-selection.xcell<- subset(results.xcell, results.xcell[,"RNGvector"] > 0.5)
+#For a selection of samples with sum(abs(residuals)) > 90
+selection.xcell<- subset(results.xcell, results.xcell[,"res_sum"] > 90)
 print(selection.xcell)
 
 #removal of outliers
 xcell_norm[,"11_Alsterpaullone.2"] <- NULL
 xcell_norm[,"11_Podophyllotoxin.4"] <- NULL
-xcell_norm[,"11_Simvastatin.4"] <- NULL
-xcell_norm[,"11_Velcade.3"] <- NULL
+
 
 xcell_median_11 <- calculate_median_curves("11", xcell_norm)
 xcell_median_norm_11 <- normalize_dmso("11", xcell_median_11)
@@ -215,8 +209,8 @@ xcell_raw_edited <- edit_df("12", xcell_raw)
 xcell_norm <- normalize_xcell(xcell_raw_edited)
 results.xcell <- do_median_polish("12", xcell_norm)
 
-#For a selection of samples with RANGEresiduals >0.5
-selection.xcell<- subset(results.xcell, results.xcell[,"RNGvector"] > 0.5)
+#For a selection of samples with sum(abs(residuals)) > 90
+selection.xcell<- subset(results.xcell, results.xcell[,"res_sum"] > 90)
 print(selection.xcell)
 
 
@@ -232,8 +226,8 @@ xcell_raw_edited <- edit_df("13", xcell_raw)
 xcell_norm <- normalize_xcell(xcell_raw_edited)
 results.xcell <- do_median_polish("13", xcell_norm)
 
-#For a selection of samples with RANGEresiduals >0.5
-selection.xcell<- subset(results.xcell, results.xcell[,"RNGvector"] > 0.5)
+#For a selection of samples with sum(abs(residuals)) > 90
+selection.xcell<- subset(results.xcell, results.xcell[,"res_sum"] > 90)
 print(selection.xcell)
 
 
@@ -249,8 +243,8 @@ xcell_raw_edited <- edit_df("14", xcell_raw)
 xcell_norm <- normalize_xcell(xcell_raw_edited)
 results.xcell <- do_median_polish("14", xcell_norm)
 
-#For a selection of samples with RANGEresiduals >0.5
-selection.xcell<- subset(results.xcell, results.xcell[,"RNGvector"] > 0.5)
+#For a selection of samples with sum(abs(residuals)) > 90
+selection.xcell<- subset(results.xcell, results.xcell[,"res_sum"] > 90)
 print(selection.xcell)
 
 
@@ -266,12 +260,15 @@ xcell_raw_edited <- edit_df("15", xcell_raw)
 xcell_norm <- normalize_xcell(xcell_raw_edited)
 results.xcell <- do_median_polish("15", xcell_norm)
 
-#For a selection of samples with RANGEresiduals >0.5
-selection.xcell<- subset(results.xcell, results.xcell[,"RNGvector"] > 0.5)
+#For a selection of samples with sum(abs(residuals)) > 90
+selection.xcell<- subset(results.xcell, results.xcell[,"res_sum"] > 90)
 print(selection.xcell)
 
 #removal of outliers
 xcell_norm[,"15_SB203580.4"] <- NULL
+
+#Mevastatin had to be removed completely
+
 
 xcell_median_15 <- calculate_median_curves("15", xcell_norm)
 xcell_median_norm_15 <- normalize_dmso("15", xcell_median_15)
@@ -285,8 +282,8 @@ xcell_raw_edited <- edit_df("16", xcell_raw)
 xcell_norm <- normalize_xcell(xcell_raw_edited)
 results.xcell <- do_median_polish("16", xcell_norm)
 
-#For a selection of samples with RANGEresiduals >0.5
-selection.xcell<- subset(results.xcell, results.xcell[,"RNGvector"] > 0.5)
+#For a selection of samples with sum(abs(residuals)) > 90
+selection.xcell<- subset(results.xcell, results.xcell[,"res_sum"] > 90)
 print(selection.xcell)
 
 xcell_median_16 <- calculate_median_curves("16", xcell_norm)

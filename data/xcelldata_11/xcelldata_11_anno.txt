@@ -51,10 +51,10 @@ C5	11_Simvastatin.1
 D11	11_Simvastatin.2
 F5	11_Simvastatin.3
 G10	11_Simvastatin.4
-C6	11_Velcade.1
-E2	11_Velcade.2
-F6	11_Velcade.3
-G11	11_Velcade.4
+C6	11_Bortezomib.1
+E2	11_Bortezomib.2
+F6	11_Bortezomib.3
+G11	11_Bortezomib.4
 B7	11_ZJ166.1
 D7	11_ZJ166.2
 G7	11_ZJ166.3

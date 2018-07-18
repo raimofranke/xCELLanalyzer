@@ -41,21 +41,24 @@ do_median_polish <- function(exp_id, xcell_norm) {
   
   RNGvector<-vector(mode = "numeric")
   result.coleff<-vector(mode = "numeric")
+  result_res_sum <- vector(mode = "numeric")
   
   pdf(paste0(my_filepath, "xcelldata", exp_id, ".pdf"), paper = "a4")
   for(i in 1:length(xcell_match)){
+    
     
     ma<-grep(xcell_match[i], colnames(xcell_norm)) #matching using reg expr #colnames NOT in succesive order 1,2,3
     z<-xcell_norm[,ma]
     z<-as.data.frame(z)
     z<-z[,order(names(z))]
     mp<-medpolish(z)
-    mp.residuals<-data.frame(mp$residuals)
-    
+    mp.residuals <- data.frame(mp$residuals)
+    mp.residuals_abs <- data.frame(abs(mp$residuals))
+    res_sum <- apply(mp.residuals_abs, 2, sum)
     rng<-diff(apply(mp.residuals, 2, range)) #calculate range for each column of mp.residuals
     RNGvector<-c(RNGvector,rng)
     result.coleff<-c(result.coleff,mp$col)
-    
+    result_res_sum <- c(result_res_sum, res_sum)
     
     plot(x=xcell_norm$h, y=z[,1], type="l", col="blue", main=colnames(z),cex.main=0.8, ylim=c(0,3), ylab="NCI", xlab="t [h]")
     lines(x=xcell_norm$h, y=z[,2], type="l", col="green")
@@ -73,8 +76,10 @@ do_median_polish <- function(exp_id, xcell_norm) {
   RNG<-as.data.frame(RNGvector)
   result.coleff<-as.data.frame(result.coleff)
   results.xcell<-cbind(RNG, result.coleff)
+  results.xcell$res_sum <- result_res_sum
   return(results.xcell)
 }
+
 
 #Calculate median curves
 calculate_median_curves <- function(exp_id, xcell_norm){
@@ -107,19 +112,6 @@ remove_dmso <- function(exp_id, xcell_median){
   return(xcell_median_notnorm)
 }
 
-#smoothing splines
-smooth_splines <- function(xcell_median_norm) {
-  xcell_sp <- matrix(ncol=22, nrow=length(colnames(xcell_median_norm)))
-  row.names(xcell_sp) <- colnames(xcell_median_norm)
-  t <- rownames(xcell_median_norm)
-  t <- as.numeric(t)
-  
-  for(i in 1:length(colnames(xcell_median_norm))) {
-    temp <- smooth.spline(x = t, y = xcell_median_norm[,i], nknots=20)
-    xcell_sp[i,]<-temp$fit$coef
-  }
-  return(xcell_sp)
-}
 
 #score each replicate and calculate overall score
 
@@ -151,18 +143,3 @@ res <- list(rep = colnames(distmat),
 return(res)
 }
 
-
-#print(sum(res$normscore)/i) #criterion how the overall procedure scored (i.e. to compare normalization etc.)
-#res <- as.data.frame(res)
-#print(res) #here we have to devide by max. score per replicate (or class in the future), one could define a threshhold to remove TCRPs which are not reproducible
-
-
-
-
-#pheatmap(median.sp, scale = "column", cluster_cols = FALSE, clustering_distance_rows = "correlation",
-#         fontsize = 1.0)
-
-#rowv <- as.dendrogram(hclust(dist(median.sp),method="complete"))
-#heatmap.2(median.sp, dendrogram=c("row"), Colv=F, Rowv=rowv, hclustfun=d, col=redgreen(75),
-#          main="xcell61", scale="column", labCol=F, key=T, symkey=FALSE, density.info="none",
-#          trace="none", cexRow=0.2)

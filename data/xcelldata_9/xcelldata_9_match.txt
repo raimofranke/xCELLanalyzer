@@ -13,5 +13,5 @@ compounds
 9_RatjadonC
 9_SB203580
 9_Simvastatin
-9_Velcade
+9_Bortezomib
 9_DMSO

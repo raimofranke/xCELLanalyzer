@@ -8,6 +8,7 @@ Apicidin
 Apicularen
 ArchazolidB
 ArgyrinA
+Bortezomib
 Camptothecin
 CCCP
 Cerulenin
@@ -54,7 +55,6 @@ Staurosporine
 Taxol
 Trichostatin
 TubulysinB
-Velcade
 Vinblastin
 Vioprolide
 Wortmannin

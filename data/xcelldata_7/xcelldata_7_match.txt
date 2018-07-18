@@ -19,6 +19,6 @@ compounds
 7_Simvastatin
 7_Taxol
 7_TubulysinB
-7_Velcade
+7_Bortezomib
 7_Vinblastine
 7_Vioprolide

@@ -3,7 +3,6 @@ compounds
 15_Etoposide
 15_H89
 15_Indirubin3monoxime
-15_Mevastatin
 15_MG132
 15_MyxothiazolA
 15_Nocodazole

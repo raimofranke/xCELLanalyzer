@@ -9,5 +9,5 @@ compounds
 11_Podophyllotoxin
 11_RatjadonC
 11_Simvastatin
-11_Velcade
+11_Bortezomib
 11_DMSO
